@@ -1,0 +1,49 @@
+Main Controller: Raspberry Pi 4
+
+4GB recommended
+
+Runs AI model
+
+Controls motors & sensors
+
+Required Hardware Components:
+
+ Power System
+
+12V 10Ah Battery (Minimum)
+
+Buck Converter (12V → 5V for Pi)
+
+Solar Panel (Optional 20W)
+
+Charging Module
+
+Movement System
+
+2 × 12V DC Motors
+
+1 × L298N Motor Driver
+
+Robot Chassis with wheels
+
+ AI Detection
+
+Raspberry Pi Camera Module
+
+ Obstacle Detection
+
+2 × HC-SR04 Ultrasonic Sensors
+
+ Waste Segregation
+
+3 Compartments (Dry / Wet / Medical)
+
+3 × Servo Motors (For bin flaps)
+
+ Navigation
+
+Neo-6M GPS Module
+
+ Fill Level Detection
+
+3 × Ultrasonic Sensors (inside bins)
