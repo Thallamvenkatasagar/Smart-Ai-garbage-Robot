@@ -1,0 +1,40 @@
+import cv2
+import numpy as np
+import tflite_runtime.interpreter as tflite
+
+# Load TFLite model
+interpreter = tflite.Interpreter(model_path="waste_classifier_model.tflite")
+interpreter.allocate_tensors()
+
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+# Class labels (must match training folder names order)
+class_names = ["dry", "medical", "wet"]
+
+def classify_waste():
+    cap = cv2.VideoCapture(0)
+
+    ret, frame = cap.read()
+    cap.release()
+
+    if not ret:
+        print("Camera Error")
+        return None
+
+    # Resize to model input size
+    img = cv2.resize(frame, (150, 150))
+    img = np.expand_dims(img, axis=0)
+    img = img / 255.0
+
+    # Set input tensor
+    interpreter.set_tensor(input_details[0]['index'], img.astype(np.float32))
+
+    # Run inference
+    interpreter.invoke()
+
+    # Get prediction
+    prediction = interpreter.get_tensor(output_details[0]['index'])
+    predicted_class = class_names[np.argmax(prediction)]
+
+    return predicted_class
