@@ -1,0 +1,32 @@
+import time
+from ultrasonic import get_distance
+from motor_control import forward, stop
+from waste_classifier import classify_waste
+
+print("Smart AI Garbage Robot Started")
+
+try:
+    while True:
+        distance = get_distance()
+        print("Distance:", distance)
+
+        if distance > 20:
+            forward()
+        else:
+            stop()
+            print("Object Detected - Classifying Waste")
+
+            waste_type = classify_waste()
+            print("Detected Waste Type:", waste_type)
+
+            if waste_type == "Dry":
+                print("Placing in Dry Bin")
+            elif waste_type == "Wet":
+                print("Placing in Wet Bin")
+            else:
+                print("Placing in Medical Bin")
+
+            time.sleep(3)
+
+except KeyboardInterrupt:
+    print("Stopping Robot")
